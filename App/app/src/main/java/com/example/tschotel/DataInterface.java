@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -27,4 +28,14 @@ public interface DataInterface {
 
 
 
+    @POST("register")
+    Call<Void> register(@Body RegisterReqBody registerReqBody);
+
+    // Login endpoint
+    @POST("login")
+    Call<LoginResBody> login(@Body LoginReqBody loginReqBody);
+
+    // Fetch customer details endpoint
+    @GET("customer")
+    Call<CustomerInfoResBody> getCustomerDetails(@Header("Authorization") String token);
 }
