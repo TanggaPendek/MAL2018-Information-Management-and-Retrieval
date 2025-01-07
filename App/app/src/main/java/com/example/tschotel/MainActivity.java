@@ -1,8 +1,12 @@
 package com.example.tschotel;
 
+import static com.example.tschotel.AuthLogic.getCustomerId;
+
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +29,18 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        ContextProvider.init(this);
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+
+
+        ContextProvider.init(this);
+/*
         RegisterReqBody registerRequestBody = new RegisterReqBody();
         registerRequestBody.setFirstName("Jonathan");
         registerRequestBody.setLastName("Brass");
@@ -40,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
         AuthLogic.loginUser(loginRequestBody);
 
-
-
+        BookingLogic.AddBooking();*/
     }
+
+
 }

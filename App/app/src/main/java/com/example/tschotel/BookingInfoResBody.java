@@ -3,6 +3,7 @@ package com.example.tschotel;
 public class BookingInfoResBody {
 
     int bookingId;
+    int customerId;
      String customerName;
      String customerEmail;
      int roomId;
@@ -92,5 +93,13 @@ public class BookingInfoResBody {
 
     public void setBookingStatus(String bookingStatus) {
         this.bookingStatus = bookingStatus;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 }
