@@ -5,6 +5,10 @@
 
 This project provides the robust backend infrastructure for the TSC Hotel and Tourism mobile application (Android). It focuses on secure data storage, efficient processing, and seamless API interaction for user authentication, booking management, and other functionalities.
 
+
+---
+
+
 **Setup Flow**
 
 1.  **Docker Environment:**
@@ -41,6 +45,10 @@ This project provides the robust backend infrastructure for the TSC Hotel and To
 
 The mobile app requires users to register and log in before performing Create, Read, Update, and Delete (CRUD) operations on booking data. This ensures data security and controlled access to booking functionalities. The backend implements secure authentication mechanisms to validate user credentials and manage access permissions.
 
+
+---
+
+
 **Technologies and Libraries:**
 
 *   **Backend:**
@@ -52,6 +60,10 @@ The mobile app requires users to register and log in before performing Create, R
     *   Azure Data Studio: Graphical interface for managing and interacting with Microsoft SQL databases.
     *   Android Studio ([https://developer.android.com/studio/](https://developer.android.com/studio/)): Integrated Development Environment (IDE) for Android app development.
     *   Retrofit2 ([https://square.github.io/retrofit/](https://square.github.io/retrofit/)): Type-safe HTTP client for Android and Java.
+
+
+---
+
 
 **Credits**
 
@@ -67,6 +79,8 @@ The mobile app requires users to register and log in before performing Create, R
 
 *   [Image Asset](https://img.freepik.com/free-photo/close-up-white-marble-texture-background_53876-63512.jpg?t=st=1736217481~exp=1736221081~hmac=aedb0dac7)
 
+
+---
 **Additional Notes**
 
 *  Ensure Docker is running before starting the SQL server container.
