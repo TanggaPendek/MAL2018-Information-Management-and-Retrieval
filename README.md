@@ -50,7 +50,8 @@ The mobile app requires users to register and log in before performing Create, R
 *   **Development Tools:***    
     *   Docker ([https://www.docker.com/](https://www.docker.com/)): Containerization platform for creating and deploying applications in a standardized environment.
     *   Azure Data Studio: Graphical interface for managing and interacting with Microsoft SQL databases.
-    *   Android Studio ([https://developer.android.com/studio](https://developer.android.com/studio)): Android development platform.
+    *   Android Studio ([https://developer.android.com/studio/](https://developer.android.com/studio/)): Integrated Development Environment (IDE) for Android app development.
+    *   Retrofit2 ([https://square.github.io/retrofit/](https://square.github.io/retrofit/)): Type-safe HTTP client for Android and Java.
 
 **Credits**
 
