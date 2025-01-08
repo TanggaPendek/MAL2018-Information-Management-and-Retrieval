@@ -7,17 +7,17 @@ const jwt = require('jsonwebtoken');
 const app = express();
 app.use(bodyParser.json());
 const saltRounds = 10;
-const JWT_SECRET = 'your_jwt_secret_key';
+const JWT_SECRET = 'bsse2409163';
 
 const dbConfig = {
-   user: 'SA', // Your SQL Server username
-  password: 'C0mp2001!', // Your SQL Server password
-  server: 'localhost', // Use 'localhost' if running on the same machine
-  port: 1433, // Default SQL Server port
-  database: 'HotelBooking', // Your database name
+   user: 'SA',
+  password: 'C0mp2001!',
+  server: 'localhost', 
+  port: 1433, 
+  database: 'HotelBooking',
   options: {
-    encrypt: true, // Use true for Azure SQL; set false for local Docker
-    trustServerCertificate: true, // Use for self-signed certificates
+    encrypt: true, 
+    trustServerCertificate: true,
   },
 };
 
@@ -40,10 +40,10 @@ app.post('/register', async (req, res) => {
     }
   
     try {
-      // Hash the password
+
       const hashedPassword = await bcrypt.hash(password, saltRounds);
   
-      // Insert user into database
+    
       const result = await pool.request()
         .input('firstName', sql.NVarChar, firstName)
         .input('lastName', sql.NVarChar, lastName)
@@ -70,7 +70,7 @@ app.post('/register', async (req, res) => {
     }
   
     try {
-      // Get the user from the database
+      
       const result = await pool.request()
         .input('email', sql.NVarChar, email)
         .query('SELECT * FROM dbo.CustomerTable WHERE email = @email');
@@ -106,7 +106,7 @@ app.post('/register', async (req, res) => {
     }
   
     try {
-      // Verify the token
+      
       const decoded = jwt.verify(token, JWT_SECRET);
       
       const result = await pool.request()
@@ -135,7 +135,7 @@ app.post('/register', async (req, res) => {
       const result = await pool.request()
         .query('SELECT * FROM BookingDetailsView');
   
-      res.status(200).json(result.recordset); // Send the booking details in the response
+      res.status(200).json(result.recordset);
     } catch (err) {
       console.error('Error executing SELECT on BookingDetailsView:', err);
       res.status(500).send('Error fetching booking details');
@@ -182,7 +182,7 @@ app.get('/getBookingDetails/:bookingId', async (req, res) => {
         return res.status(404).send('Booking not found');
       }
       
-      res.status(200).json(result.recordset[0]); // Return the specific booking details
+      res.status(200).json(result.recordset[0]); 
     } catch (err) {
       console.error('Error executing SELECT on BookingDetailsView:', err);
       res.status(500).send('Error fetching booking details');
@@ -198,11 +198,11 @@ app.put('/updateBooking/:bookingId', async (req, res) => {
         statusId,
     } = req.body;
     
-    const { bookingId } = req.params; // Get bookingId from URL
+    const { bookingId } = req.params; 
 
     try {
         const result = await pool.request()
-            .input('bookingId', sql.Int, bookingId) // bookingId from URL
+            .input('bookingId', sql.Int, bookingId) 
             .input('roomId', sql.Int, roomId)
             .input('bookedDate', sql.Date, bookedDate)
             .input('amountDay', sql.Int, amountDay)
