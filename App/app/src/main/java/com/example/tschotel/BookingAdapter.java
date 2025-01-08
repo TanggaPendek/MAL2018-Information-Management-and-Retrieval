@@ -28,11 +28,11 @@ import java.util.Locale;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder> {
 
-    private Context context; // Add a context field
+    private Context context;
     private List<BookingInfoResBody> bookingList;
 
     public BookingAdapter(Context context, List<BookingInfoResBody> bookingList) {
-        this.context = context; // Save context
+        this.context = context;
         this.bookingList = bookingList;
     }
 
@@ -73,7 +73,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
 
                 }
             });
-            removeItem(position); // Manually remove the item
+            removeItem(position);
         });
 
         Dialog editDialog = new Dialog(context);
@@ -97,7 +97,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
 
             long calendarDateInMillis = calendarView.getDate();
             LocalDate calendarDate = Instant.ofEpochMilli(calendarDateInMillis)
-                    .atZone(ZoneId.of("Europe/London"))  // Make sure it's in UK time
+                    .atZone(ZoneId.of("Europe/London"))
                     .toLocalDate();
 
             LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of("Europe/London"));
@@ -135,7 +135,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
         return bookingList.size();
     }
 
-    // Method to calculate checkout time
     private String calculateCheckoutTime(String bookingDate, int days) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -149,17 +148,15 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
         return "Invalid date";
     }
 
-    // Add this method to update dataset
     public void updateList(List<BookingInfoResBody> newBookingList) {
         this.bookingList = newBookingList;
-        notifyDataSetChanged(); // Refresh the entire list
+        notifyDataSetChanged();
     }
 
-    // Add this method to remove an item
     public void removeItem(int position) {
         bookingList.remove(position);
-        notifyItemRemoved(position); // Notify RecyclerView of item removal
-        notifyItemRangeChanged(position, bookingList.size()); // Update the affected range
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, bookingList.size());
     }
 
 

@@ -58,11 +58,9 @@ public class LoginActivity extends AppCompatActivity  implements AuthLogic.AuthL
 
     @Override
     public void onLoginSuccess(String token) {
-        // Handle login success, navigate to the next activity
         Log.d("Login", "Login successful, token: " + token);
         Log.d("logged","login");
 
-        // Now that login is successful, go to another activity
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
@@ -70,19 +68,16 @@ public class LoginActivity extends AppCompatActivity  implements AuthLogic.AuthL
 
     @Override
     public void onLoginFailure(String errorMessage) {
-        // Handle login failure
         Log.e("Login", "Login failed: " + errorMessage);
     }
 
     @Override
     public void onFetchCustomerDetailsSuccess(int customerId) {
-        // Handle customer details fetch success
         Log.d("CustomerDetails", "Customer ID fetched: " + customerId);
     }
 
     @Override
     public void onFetchCustomerDetailsFailure(String errorMessage) {
-        // Handle failure to fetch customer details
         Log.e("CustomerDetails", "Failed to fetch customer details: " + errorMessage);
     }
 

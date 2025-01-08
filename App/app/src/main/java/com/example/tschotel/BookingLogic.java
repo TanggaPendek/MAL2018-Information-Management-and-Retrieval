@@ -30,18 +30,13 @@ public class BookingLogic {
             public void onResponse(Call<List<BookingInfoResBody>> call, Response<List<BookingInfoResBody>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<BookingInfoResBody> bookingList = response.body();
-
-                    // Filter the list by customerId
                     List<BookingInfoResBody> filteredList = new ArrayList<>();
                     for (BookingInfoResBody booking : bookingList) {
                         if (booking.getCustomerId() == customerId) {
                             filteredList.add(booking);
                         }
                     }
-
-                    // Save filtered booking list to SharedPreferences
                     saveBookingList(filteredList);
-                    // Log the filtered results (optional)
                     for (BookingInfoResBody booking : filteredList) {
                         Log.d("FilteredBookingDetails", "ID: " + booking.getBookingId() +
                                 ", Customer: " + booking.getCustomerName() +
@@ -79,7 +74,7 @@ public class BookingLogic {
     public static void AddBooking(AddBookingReqBody addBookingReqBody, BookingAdapter bookingAdapter, BookingCallback callback) {
         DataInterface bookingApi = RetrofitClient.getInstance().create(DataInterface.class);
 
-        // Make the API call
+
         Call<BookingInfoResBody> call = bookingApi.addBooking(addBookingReqBody);
         call.enqueue(new Callback<BookingInfoResBody>() {
             @Override
@@ -91,14 +86,14 @@ public class BookingLogic {
                     bookingAdapter.notifyDataSetChanged();
 
                     if (callback != null) {
-                        callback.onSuccess(); // Notify on success
+                        callback.onSuccess();
                     }
                 } else {
                     try {
                         String errorMessage = response.errorBody() != null ? response.errorBody().string() : "Unknown error";
                         Log.e("AddBooking", "Error: " + errorMessage);
                         if (callback != null) {
-                            callback.onFailure(errorMessage); // Notify on failure
+                            callback.onFailure(errorMessage);
                         }
                     } catch (IOException e) {
                         Log.e("AddBooking", "Error reading errorBody: " + e.getMessage());
@@ -113,7 +108,7 @@ public class BookingLogic {
             public void onFailure(Call<BookingInfoResBody> call, Throwable t) {
                 Log.e("AddBooking", "Failed to add data: " + t.getMessage());
                 if (callback != null) {
-                    callback.onFailure(t.getMessage()); // Notify on failure
+                    callback.onFailure(t.getMessage());
                 }
             }
         });
@@ -134,12 +129,12 @@ public class BookingLogic {
                     GetData(AuthLogic.getCustomerId());
 
                     if (callback != null) {
-                        callback.onSuccess(); // Notify on success
+                        callback.onSuccess();
                     }
                 } else {
                     Log.e("DeleteBooking", "Error: " + response.errorBody());
                     if (callback != null) {
-                        callback.onFailure(response.errorBody().toString()); // Notify on failure
+                        callback.onFailure(response.errorBody().toString());
                     }
                 }
             }
@@ -148,7 +143,7 @@ public class BookingLogic {
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.e("DeleteBooking", "Failed to delete data: " + t.getMessage());
                 if (callback != null) {
-                    callback.onFailure(t.getMessage()); // Notify on failure
+                    callback.onFailure(t.getMessage());
                 }
             }
         });
@@ -175,14 +170,14 @@ public class BookingLogic {
                     GetData(AuthLogic.getCustomerId());
 
                     if (callback != null) {
-                        callback.onSuccess(); // Notify on success
+                        callback.onSuccess();
                     }
                 } else {
                     try {
                         String errorMessage = response.errorBody() != null ? response.errorBody().string() : "Unknown error";
                         Log.e("UpdateBooking", "Error: " + errorMessage);
                         if (callback != null) {
-                            callback.onFailure(errorMessage); // Notify on failure
+                            callback.onFailure(errorMessage);
                         }
                     } catch (IOException e) {
                         Log.e("UpdateBooking", "Error reading errorBody: " + e.getMessage());
@@ -197,20 +192,20 @@ public class BookingLogic {
             public void onFailure(Call<UpdateBookingResBody> call, Throwable t) {
                 Log.e("UpdateBooking", "Failed to update data: " + t.getMessage());
                 if (callback != null) {
-                    callback.onFailure(t.getMessage()); // Notify on failure
+                    callback.onFailure(t.getMessage());
                 }
             }
         });
     }
 
 
-    // Save booking info
+
     public static void saveBookingList(List<BookingInfoResBody> bookingList) {
-        Context context = ContextProvider.getContext(); // Get context from singleton
+        Context context = ContextProvider.getContext();
         SharedPreferences sharedPreferences = context.getSharedPreferences("BookingPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        // Convert the list to JSON
+
         Gson gson = new Gson();
         String json = gson.toJson(bookingList);
         editor.putString("booking_list", json);
@@ -221,15 +216,14 @@ public class BookingLogic {
 
 
 
-    // Retrieve booking info
+
     public static BookingInfoResBody getBookingInfo() {
-        Context context = ContextProvider.getContext(); // Get context from singleton
+        Context context = ContextProvider.getContext();
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("BookingPrefs", Context.MODE_PRIVATE);
         String bookingJson = sharedPreferences.getString("booking_list", null);
 
         if (bookingJson != null) {
-            // Convert the JSON string back to a BookingInfoResBody object
             Gson gson = new Gson();
             BookingInfoResBody booking = gson.fromJson(bookingJson, BookingInfoResBody.class);
 
@@ -238,7 +232,7 @@ public class BookingLogic {
             return booking;
         } else {
             Log.d("BookingInfo", "No booking info found");
-            return null; // No booking data found
+            return null;
         }
     }
 

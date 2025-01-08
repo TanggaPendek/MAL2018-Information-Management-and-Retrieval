@@ -18,11 +18,9 @@ public interface DataInterface {
     @POST("insertBooking")
     Call<BookingInfoResBody> addBooking(@Body AddBookingReqBody addBooking);
 
-    // Delete a booking by ID
     @DELETE("deleteBooking/{bookingId}")
     Call<Void> deleteBooking(@Path("bookingId") int bookingId);
 
-    // Update booking status (for example, marking as complete)
     @PUT("updateBooking/{bookingId}")
     Call<UpdateBookingResBody> updateBooking(@Path("bookingId") int bookingId, @Body  UpdateBookingReqBody updateBooking);
 
@@ -31,11 +29,9 @@ public interface DataInterface {
     @POST("register")
     Call<Void> register(@Body RegisterReqBody registerReqBody);
 
-    // Login endpoint
     @POST("login")
     Call<LoginResBody> login(@Body LoginReqBody loginReqBody);
 
-    // Fetch customer details endpoint
     @GET("customer")
     Call<CustomerInfoResBody> getCustomerDetails(@Header("Authorization") String token);
 }

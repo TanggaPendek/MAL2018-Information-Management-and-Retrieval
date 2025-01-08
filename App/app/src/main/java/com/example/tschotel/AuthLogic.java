@@ -61,7 +61,7 @@ public class AuthLogic {
 
     // Login user logic with callback
     public static void loginUser(LoginReqBody loginRequestBody, AuthListener listener) {
-        authListener = listener; // Set listener for callback
+        authListener = listener;
 
         DataInterface authApi = RetrofitClient.getInstance().create(DataInterface.class);
 
@@ -141,9 +141,9 @@ public class AuthLogic {
         });
     }
 
-    // Save token
+
     public static void saveToken(String token) {
-        Context context = ContextProvider.getContext(); // Get context from singleton
+        Context context = ContextProvider.getContext();
 
         Log.d(TAG, "Saving token: " + token);
 
@@ -155,9 +155,9 @@ public class AuthLogic {
         Log.d(TAG, "Token saved successfully " + token);
     }
 
-    // Retrieve token
+
     public static String getToken() {
-        Context context = ContextProvider.getContext(); // Get context from singleton
+        Context context = ContextProvider.getContext();
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
         String token = sharedPreferences.getString("jwt_token", null);
@@ -171,9 +171,9 @@ public class AuthLogic {
         return token;
     }
 
-    // Save customer ID
+
     public static void saveCustomerId(int customerId) {
-        Context context = ContextProvider.getContext(); // Get context from singleton
+        Context context = ContextProvider.getContext();
 
         Log.d("CustomerID", "Saving customerId: " + customerId);
 
@@ -185,9 +185,9 @@ public class AuthLogic {
         Log.d("CustomerID", "CustomerId saved successfully: " + customerId);
     }
 
-    // Retrieve customer ID
+
     public static int getCustomerId() {
-        Context context = ContextProvider.getContext(); // Get context from singleton
+        Context context = ContextProvider.getContext();
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         int customerId = sharedPreferences.getInt("customer_id", -1);
